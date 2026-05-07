@@ -3,6 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="En kuratert samling av offentlige og relevante norske API-er — vær, nordlys, trafikk, kollektivtransport, geodata, registre og mer. 18+ norske API-er samlet på ett sted.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="NorskeAPI • Samling av norske API-er">
+    <meta property="og:description" content="En kuratert samling av offentlige og relevante norske API-er — vær, nordlys, trafikk, kollektivtransport, geodata, registre og mer.">
+    <meta property="og:url" content="https://norskeapi.vercel.app/">
+    <meta property="og:image" content="https://norskeapi.vercel.app/Gamechanging-logo.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="NorskeAPI • Samling av norske API-er">
+    <meta name="twitter:description" content="En kuratert samling av offentlige og relevante norske API-er — vær, nordlys, trafikk, kollektivtransport, geodata, registre og mer.">
+    <meta name="twitter:image" content="https://norskeapi.vercel.app/Gamechanging-logo.png">
+    <link rel="canonical" href="https://norskeapi.vercel.app/">
     <title>NorskeAPI • Samling av norske API-er</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -80,6 +91,58 @@
             box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.05);
         }
     </style>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "NorskeAPI",
+        "alternateName": "NorskeAPI — Samling av norske API-er",
+        "description": "En kuratert samling av offentlige og relevante norske API-er — vær, nordlys, trafikk, kollektivtransport, geodata, registre og mer.",
+        "url": "https://norskeapi.vercel.app/",
+        "inLanguage": "nb",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Gamechanging AS",
+            "url": "https://gamechanging.no",
+            "logo": "https://norskeapi.vercel.app/Gamechanging-logo.png"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "NorskeAPI — Samling av norske API-er",
+        "description": "En kuratert samling av offentlige og relevante norske API-er.",
+        "url": "https://norskeapi.vercel.app/",
+        "inLanguage": "nb",
+        "mainEntity": {
+            "@type": "ItemList",
+            "itemListElement": [
+                {"@type":"APIReference","name":"MET Weather API (Yr)","description":"Gratis værprognoser, observasjoner, luftkvalitet og nordlysprognose.","url":"https://api.met.no/","provider":{"@type":"Organization","name":"Meteorologisk institutt (MET)"},"category":"Vær"},
+                {"@type":"APIReference","name":"Entur Journey Planner API","description":"Nasjonal reiseplanlegger for buss, tog, trikk, båt og mer.","url":"https://developer.entur.org/","provider":{"@type":"Organization","name":"Entur AS"},"category":"Transport"},
+                {"@type":"APIReference","name":"Trafikkdata API","description":"Trafikkvolum, sykkel- og biltrafikk fra målepunkter over hele Norge.","url":"https://trafikkdata.atlas.vegvesen.no/","provider":{"@type":"Organization","name":"Statens vegvesen"},"category":"Trafikk"},
+                {"@type":"APIReference","name":"Enhetsregisteret API","description":"Søk og hent data om alle norske bedrifter og enheter.","url":"https://data.brreg.no/enhetsregisteret/api/dokumentasjon","provider":{"@type":"Organization","name":"Brønnøysundregistrene"},"category":"Register"},
+                {"@type":"APIReference","name":"Kartverket / Geonorge API-er","description":"Geodata, WMS/WFS karttjenester, stedsnavnregister og geokoding.","url":"https://kartverket.no/api-og-data","provider":{"@type":"Organization","name":"Kartverket"},"category":"Geodata"},
+                {"@type":"APIReference","name":"SSB PxWebApi","description":"Tilgang til over 7500 statistikktabeller om befolkning, økonomi, helse og samfunn.","url":"https://www.ssb.no/api","provider":{"@type":"Organization","name":"Statistisk sentralbyrå (SSB)"},"category":"Statistikk"},
+                {"@type":"APIReference","name":"NVE HydAPI","description":"Hydrologiske data: vannføring, vannstand, temperatur, snø og flomvarsling.","url":"https://hydapi.nve.no/","provider":{"@type":"Organization","name":"Norges vassdrags- og energidirektorat"},"category":"Hydrologi"},
+                {"@type":"APIReference","name":"xapi.no","description":"Én integrasjon til 40+ norske offentlige datakilder.","url":"https://www.xapi.no/","provider":{"@type":"Organization","name":"xapi.no"},"category":"Aggregator"},
+                {"@type":"APIReference","name":"Fiskeridirektoratet API-katalog","description":"Data om akvakultur, fiskeri, miljøundersøkelser og fartøyregister.","url":"https://api.fiskeridir.no/catalog/","provider":{"@type":"Organization","name":"Fiskeridirektoratet"},"category":"Miljø"},
+                {"@type":"APIReference","name":"BarentsWatch APIs","description":"Marine data: AIS-skipstrafikk, fiskehelse, bølgevarsel og havobservasjoner.","url":"https://developer.barentswatch.no/","provider":{"@type":"Organization","name":"BarentsWatch"},"category":"Marine"},
+                {"@type":"APIReference","name":"NVE api.nve.no","description":"Flere API-er: Regobs, Vannkraftdatabase, Flomvarsling og mer.","url":"https://api.nve.no/","provider":{"@type":"Organization","name":"NVE"},"category":"Miljø"},
+                {"@type":"APIReference","name":"data.norge.no API","description":"API for å søke i hele Norges felles datakatalog.","url":"https://data.norge.no/en/technical/api","provider":{"@type":"Organization","name":"Digitaliseringsdirektoratet"},"category":"Data"},
+                {"@type":"APIReference","name":"Nordlys / Aurora Forecast (Yr)","description":"Nordlysprognose basert på romværdata. Perfekt for nordlysapper.","url":"https://hjelp.yr.no/hc/no/articles/4411702484754-Aurora-forecast-on-Yr","provider":{"@type":"Organization","name":"Meteorologisk institutt"},"category":"Nordlys"},
+                {"@type":"APIReference","name":"Vegvesen NVDB / Routing","description":"Nasjonal vegdatabase og ruteplanleggingstjenester via åpne grensesnitt.","url":"https://www.vegvesen.no/fag/teknologi/apne-data/","provider":{"@type":"Organization","name":"Statens vegvesen"},"category":"Trafikk"},
+                {"@type":"APIReference","name":"Bring / Posten Developer APIs","description":"Shipping Guide, Booking, Tracking, rates og EDI for pakker og gods.","url":"https://developer.bring.com/","provider":{"@type":"Organization","name":"Posten Bring AS"},"category":"Logistikk"},
+                {"@type":"APIReference","name":"Vipps MobilePay APIs","description":"Betalings-API, eID, signering, checkout og recurring payments.","url":"https://developer.vippsmobilepay.com/","provider":{"@type":"Organization","name":"Vipps MobilePay"},"category":"Betaling"},
+                {"@type":"APIReference","name":"Matrikkel API (Kartverket)","description":"Offisielt eiendomsregister: adresser, bygninger, boliger og eiere.","url":"https://kartverket.no/api-og-data/eiendomsdata","provider":{"@type":"Organization","name":"Kartverket"},"category":"Eiendom"},
+                {"@type":"APIReference","name":"Tolletaten Open Data API","description":"Åpne data og API-er for import/eksport, toll, handelsstatistikk.","url":"https://data.toll.no/","provider":{"@type":"Organization","name":"Tolletaten"},"category":"Handel"}
+            ]
+        }
+    }
+    </script>
 </head>
 <body class="bg-slate-50 text-slate-800">
     <!-- Navbar -->
@@ -472,7 +535,7 @@
                 <!-- Venstre side -->
                 <div>
                     <div class="flex items-center gap-x-3 mb-3">
-                        <img src="Gamechanging-logo.png" alt="Gamechanging AS" class="h-8 w-auto">
+                        <img src="Gamechanging-logo.png" alt="Gamechanging AS" class="h-8 w-auto" loading="lazy">
                         <a href="https://gamechanging.no" target="_blank" class="font-semibold text-slate-700 hover:text-slate-900">Gamechanging AS</a>
                     </div>
                     <p class="text-xs">
