@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="nb" style="scroll-behavior: smooth;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NorskeAPI • Samling av norske API-er</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        
+        :root {
+            --primary: #f1592a;
+        }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .font-display {
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            font-weight: 600;
+        }
+
+        .api-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .api-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        .section-header {
+            font-size: 2.25rem;
+            line-height: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+        }
+
+        .nav-active {
+            color: #f1592a;
+            font-weight: 600;
+        }
+
+        .category-pill {
+            transition: all 0.2s ease;
+        }
+
+        .category-pill.active {
+            background-color: #f1592a;
+            color: white;
+            border-color: #f1592a;
+        }
+
+        .api-tag {
+            font-size: 0.75rem;
+            padding: 0.125rem 0.5rem;
+            border-radius: 9999px;
+            font-weight: 500;
+            background-color: #e0f2f1;
+            color: #0f766e;
+        }
+
+        .hero-bg {
+            background: linear-gradient(135deg, #f1592a 0%, #c2410c 100%);
+        }
+
+        .stat-number {
+            font-variant-numeric: tabular-nums;
+        }
+
+        .filter-active {
+            background-color: #f1592a;
+            color: white !important;
+            border-color: #f1592a;
+        }
+        
+        .modern-shadow {
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+    <!-- Navbar -->
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-screen-xl mx-auto px-6">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center gap-x-3">
+                    <img src="gamechanging-logo.png" alt="Gamechanging AS" class="h-9 w-auto">
+                    <div>
+                        <span class="font-display text-2xl font-semibold tracking-tight text-slate-900">NorskeAPI</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex items-center gap-x-8 text-sm">
+                    <a href="#apiene" class="text-slate-600 hover:text-[#f1592a] font-medium transition-colors">API-ene</a>
+                    <a href="#bestill-api" class="text-slate-600 hover:text-[#f1592a] font-medium transition-colors">Få din egen API</a>
+                    <a href="#bidra" class="text-slate-600 hover:text-[#f1592a] font-medium transition-colors">Bidra</a>
+                </div>
+
+                <div class="flex items-center gap-x-3">
+                    <!-- Mobile menu -->
+                    <button class="md:hidden w-9 h-9 flex items-center justify-center text-slate-500" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-t bg-white px-6 py-5 shadow-lg">
+            <div class="flex flex-col gap-y-1 text-sm">
+                <a href="#apiene" class="py-2.5 px-3 rounded-2xl hover:bg-slate-100 text-slate-700 hover:text-[#f1592a]">API-ene</a>
+                <a href="#bestill-api" class="py-2.5 px-3 rounded-2xl hover:bg-slate-100 text-slate-700 hover:text-[#f1592a]">Få din egen API</a>
+                <a href="#bidra" class="py-2.5 px-3 rounded-2xl hover:bg-slate-100 text-slate-700 hover:text-[#f1592a]">Bidra</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero-bg text-white">
+        <div class="max-w-screen-xl mx-auto px-6 pt-16 pb-20">
+            <div class="max-w-3xl">
+                <div class="inline-flex items-center gap-x-2 bg-white/20 backdrop-blur-md px-4 py-1.5 rounded-3xl text-sm mb-6">
+                    <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                    <span class="font-medium">Nå med 18+ API-er • Oppdatert mai 2026</span>
+                </div>
+                
+                <h1 class="text-6xl md:text-7xl font-display font-semibold tracking-tighter leading-none mb-6">
+                    Alle norske API-er.<br>
+                    <span class="text-white/90">På ett sted.</span>
+                </h1>
+                
+                <p class="max-w-lg text-xl text-white/90 mb-8 leading-relaxed">
+                    En kuratert samling av offentlige og relevante norske API-er — vær, nordlys, trafikk, kollektivtransport, geodata, bildebanker, registre og mer.<br>
+                    <span class="text-white/80">Nettstedet dyrker norsk delingskultur.</span>
+                </p>
+                
+                <div class="flex flex-wrap gap-4">
+                    <a href="#apiene" 
+                       class="inline-flex items-center justify-center gap-x-3 bg-white text-[#f1592a] font-semibold px-8 h-14 rounded-3xl text-base shadow-xl hover:shadow-2xl active:scale-[0.985] transition-all">
+                        <span>Utforsk API-ene</span>
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </a>
+                    
+                    <a href="#bestill-api" 
+                       class="inline-flex items-center justify-center gap-x-3 border border-white hover:bg-white hover:text-[#f1592a] px-8 h-14 rounded-3xl text-base font-semibold text-white transition-all">
+                        <span>Få din egen API</span>
+                    </a>
+                    
+                    <a href="#bidra" 
+                       class="inline-flex items-center justify-center gap-x-3 border border-white hover:bg-white hover:text-[#f1592a] px-8 h-14 rounded-3xl text-base font-semibold text-white transition-all">
+                        <span>Bidra med et API</span>
+                    </a>
+                </div>
+                
+                <div class="mt-8 flex items-center gap-x-8 text-sm text-white/70">
+                    <div class="flex items-center gap-x-2">
+                        <i class="fa-solid fa-check-circle"></i>
+                        <span>Gratis &amp; åpne data</span>
+                    </div>
+                    <div class="flex items-center gap-x-2">
+                        <i class="fa-solid fa-check-circle"></i>
+                        <span>Offisielle kilder</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Stats -->
+    <div class="max-w-screen-xl mx-auto px-6 -mt-8 relative z-10">
+        <div class="bg-white rounded-3xl shadow-xl border border-slate-100 p-8 grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div>
+                <div class="text-4xl font-semibold text-[#f1592a] stat-number">18</div>
+                <div class="text-slate-500 mt-1">API-er samlet</div>
+            </div>
+            <div>
+                <div class="text-4xl font-semibold text-[#f1592a] stat-number">8</div>
+                <div class="text-slate-500 mt-1">Kategorier</div>
+            </div>
+            <div>
+                <div class="text-4xl font-semibold text-[#f1592a] stat-number">100%</div>
+                <div class="text-slate-500 mt-1">Norske kilder</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search + Filters -->
+    <div id="apiene" class="max-w-screen-xl mx-auto px-6 pt-16">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-y-4 mb-8">
+            <div>
+                <h2 class="section-header tracking-tight">Utforsk API-ene</h2>
+                <p class="text-slate-600 mt-2">Finn det du trenger blant norske offentlige data-API-er</p>
+            </div>
+            
+            <!-- Search + Category Dropdown -->
+            <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+                <!-- Search -->
+                <div class="relative w-full md:w-72">
+                    <input type="text" id="search-input" 
+                           class="w-full pl-12 pr-5 py-3.5 bg-white border border-slate-200 focus:border-[#f1592a] rounded-3xl text-sm placeholder:text-slate-400 outline-none"
+                           placeholder="Søk etter API...">
+                    <i class="fa-solid fa-search absolute left-5 top-4 text-slate-400"></i>
+                </div>
+
+                <!-- Category Dropdown -->
+                <div class="relative w-full sm:w-56">
+                    <button onclick="toggleCategoryDropdown()" 
+                            class="w-full flex items-center justify-between px-5 py-3.5 bg-white border border-slate-200 hover:border-[#f1592a] rounded-3xl text-sm text-left transition-colors">
+                        <span id="category-button-text">Alle kategorier</span>
+                        <i class="fa-solid fa-chevron-down ml-2 text-xs"></i>
+                    </button>
+
+                    <!-- Dropdown Menu -->
+                    <div id="category-dropdown" class="hidden absolute z-50 mt-2 w-full bg-white border border-slate-200 rounded-3xl shadow-xl py-2 max-h-80 overflow-auto">
+                        <div class="px-4 py-2 text-xs font-semibold text-slate-500 border-b">Velg kategorier</div>
+                        <div id="category-checkboxes" class="p-2">
+                            <!-- Populated by JS -->
+                        </div>
+                        <div class="border-t px-4 py-2 flex justify-between text-sm">
+                            <button onclick="clearCategoryFilters(); toggleCategoryDropdown()" 
+                                    class="text-slate-500 hover:text-slate-700">Nullstill</button>
+                            <button onclick="toggleCategoryDropdown()" 
+                                    class="text-[#f1592a] font-medium hover:underline">Ferdig</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- API Grid -->
+        <div id="api-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Populated dynamically by JavaScript -->
+        </div>
+        
+        <div id="no-results" class="hidden text-center py-12">
+            <i class="fa-solid fa-search text-4xl text-slate-300 mb-4"></i>
+            <p class="text-slate-500">Ingen API-er funnet med disse filtrene.</p>
+            <button onclick="resetFilters()" 
+                    class="mt-4 text-sm text-[#f1592a] hover:underline font-medium">Tilbakestill filtre</button>
+        </div>
+    </div>
+
+    <!-- Hva er en API? -->
+    <div id="hva-er-api" class="max-w-screen-xl mx-auto px-6 pt-16 pb-8">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="text-3xl font-semibold tracking-tight mb-4">Hva er egentlig en API?</h2>
+            <div class="text-slate-600 text-lg leading-relaxed space-y-4">
+                <p>
+                    En <strong>API</strong> (Application Programming Interface) er en slags "døråpner" mellom forskjellige dataprogrammer og tjenester.
+                </p>
+                <p>
+                    Den lar apper, nettsider og systemer snakke sammen på en sikker og strukturert måte – uten at du trenger å vite hvordan alt fungerer bak kulissene.
+                </p>
+                <p class="text-base">
+                    <strong>Eksempel:</strong> Når du åpner Yr-appen og ser været i Oslo, henter appen data fra Meteorologisk institutt sitt API. 
+                    Samme prinsipp gjelder for trafikkdata, kollektivtransport, bedriftsregister og nesten alt annet på denne siden.
+                </p>
+                <p class="text-sm text-slate-500 italic">
+                    Kort sagt: API-er gjør det mulig å bygge smarte, datadrevne løsninger raskt og effektivt.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hvorfor bruke NorskeAPI? -->
+    <div class="max-w-screen-xl mx-auto px-6 pt-8 pb-8">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-3xl font-semibold tracking-tight mb-6 text-center">Hvorfor bruke NorskeAPI?</h2>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-white border border-slate-100 rounded-3xl p-6">
+                    <div class="text-[#f1592a] mb-3"><i class="fa-solid fa-search text-2xl"></i></div>
+                    <h4 class="font-semibold mb-2">Spar tid</h4>
+                    <p class="text-sm text-slate-600">Slutt å lete på tvers av ulike portaler. Alt du trenger av relevante norske API-er er samlet på ett sted.</p>
+                </div>
+                <div class="bg-white border border-slate-100 rounded-3xl p-6">
+                    <div class="text-[#f1592a] mb-3"><i class="fa-solid fa-plug text-2xl"></i></div>
+                    <h4 class="font-semibold mb-2">Kom raskere i gang</h4>
+                    <p class="text-sm text-slate-600">Finn dokumentasjon, lenker og oversikt over de mest brukte API-ene uten å måtte grave i offentlige kataloger.</p>
+                </div>
+                <div class="bg-white border border-slate-100 rounded-3xl p-6">
+                    <div class="text-[#f1592a] mb-3"><i class="fa-solid fa-handshake text-2xl"></i></div>
+                    <h4 class="font-semibold mb-2">Få hjelp når du trenger det</h4>
+                    <p class="text-sm text-slate-600">Mangler du et API? Gamechanging AS kan utvikle det skreddersydd for deg.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Om Gamechanging AS -->
+    <div id="om-oss" class="max-w-screen-xl mx-auto px-6 pt-12 pb-8">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="text-3xl font-semibold tracking-tight mb-4">Om Gamechanging AS</h2>
+            <div class="mt-6">
+                <a href="https://gamechanging.no" target="_blank" 
+                   class="inline-flex items-center gap-x-2 text-[#f1592a] font-semibold hover:underline">
+                    Besøk gamechanging.no 
+                    <i class="fa-solid fa-external-link-alt text-sm"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bestill din egen API - Gamechanging AS -->
+    <div id="bestill-api" class="max-w-screen-xl mx-auto px-6 pt-8 pb-16">
+        <div class="bg-gradient-to-br from-[#f1592a] to-[#c2410c] text-white rounded-3xl p-10 md:p-14">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex flex-col md:flex-row md:items-center gap-8">
+                    <div class="flex-1">
+                        <div class="inline-block bg-white/20 text-xs font-semibold px-4 py-1 rounded-3xl mb-4">FOR BEDRIFTER &amp; OFFENTLIG SEKTOR</div>
+                        <h2 class="text-4xl font-semibold tracking-tight mb-4">Vi kan hjelpe deg med skreddersydde API-er</h2>
+                        <p class="text-white/90 text-lg mb-6">
+                            Gamechanging AS utvikler og drifter API-løsninger for norske bedrifter og offentlig sektor. 
+                            Ta kontakt hvis du trenger hjelp med integrasjoner, datatilgang eller skreddersydde løsninger.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-3 text-sm">
+                            <div class="flex items-center gap-x-2 bg-white/10 px-4 py-2 rounded-2xl">
+                                <i class="fa-solid fa-check"></i>
+                                <span>Rask responstid</span>
+                            </div>
+                            <div class="flex items-center gap-x-2 bg-white/10 px-4 py-2 rounded-2xl">
+                                <i class="fa-solid fa-check"></i>
+                                <span>Norsk selskap</span>
+                            </div>
+                            <div class="flex items-center gap-x-2 bg-white/10 px-4 py-2 rounded-2xl">
+                                <i class="fa-solid fa-check"></i>
+                                <span>Personlig oppfølging</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-1 md:max-w-sm">
+                        <div class="bg-white rounded-3xl p-8 text-slate-800">
+                            <h4 class="font-semibold mb-4 text-lg">Hvilket API trenger du?</h4>
+                            
+                            <!-- Bestill API - koblet til Formspree -->
+                            <form id="custom-api-form" 
+                                  action="https://formspree.io/f/mpqblkvz" 
+                                  method="POST">
+                                <input type="hidden" name="_subject" value="Ny forespørsel om skreddersydd API - Gamechanging AS">
+                                <div class="space-y-4">
+                                    <div>
+                                        <input type="text" name="name" id="custom-name" placeholder="Navn og bedrift / organisasjon" required
+                                               class="w-full border border-slate-200 rounded-2xl px-4 py-3 text-sm">
+                                    </div>
+                                    <div>
+                                        <textarea name="description" id="custom-desc" rows="3" placeholder="Beskriv kort hva slags API dere trenger (f.eks. integrasjon mot matrikkelen, sanntidsdata, eller noe helt annet)" required
+                                                  class="w-full border border-slate-200 rounded-2xl px-4 py-3 text-sm resize-y"></textarea>
+                                    </div>
+                                    <div>
+                                        <input type="email" name="email" id="custom-email" placeholder="E-postadresse for svar" required
+                                               class="w-full border border-slate-200 rounded-2xl px-4 py-3 text-sm">
+                                    </div>
+                                    <button type="submit" 
+                                            class="w-full bg-[#f1592a] hover:bg-[#f1592a]/90 text-white font-semibold py-3.5 rounded-3xl transition-all active:scale-[0.985]">
+                                        Send forespørsel
+                                    </button>
+                                </div>
+                            </form>
+                            <p class="text-xs text-slate-500 mt-3 text-center">Vi svarer vanligvis innen 24 timer.</p>
+                            
+                            <div class="mt-5 pt-4 border-t border-slate-100 text-xs text-slate-600">
+                                <strong>Hva skjer etter innsending?</strong><br>
+                                Vi tar kontakt innen kort tid for å avklare behovet ditt.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Why this exists / About -->
+    <div class="max-w-screen-xl mx-auto px-6 pt-8 pb-12">
+        <div class="bg-white border border-slate-100 rounded-3xl p-10 md:p-14">
+            <div class="grid md:grid-cols-12 gap-x-12 gap-y-8 items-center">
+                <div class="md:col-span-7">
+                    <h3 class="text-3xl font-semibold tracking-tight mb-4">Hvorfor NorskeAPI?</h3>
+                    <div class="space-y-4 text-slate-600 leading-relaxed">
+                        <p>
+                            <strong>data.norge.no</strong> er den offisielle portalen for åpne data i Norge. 
+                            Den er fantastisk, men kan være overveldende når du bare vil finne det beste vær-APIet, 
+                            trafikkdata eller en nasjonal reiseplanlegger.
+                        </p>
+                        <p>
+                            <strong>NorskeAPI</strong> er en kuratert, utviklervennlig oversikt over de mest 
+                            relevante og brukte norske API-er — spesielt de som er nyttige for apper, 
+                            nettsider og datadrevne prosjekter.
+                        </p>
+                    </div>
+                </div>
+                <div class="md:col-span-5 bg-slate-50 rounded-3xl p-8 text-sm">
+                    <div class="font-semibold mb-3 text-slate-700">Dette er en community-drevet ressurs</div>
+                    <ul class="space-y-2.5 text-slate-600">
+                        <li class="flex gap-x-3"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> <span>Alle lenker peker til offisielle kilder</span></li>
+                        <li class="flex gap-x-3"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> <span>Gratis og åpne data (NLOD der det gjelder)</span></li>
+                        <li class="flex gap-x-3"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> <span>Regelmessig oppdatert av fellesskapet</span></li>
+                        <li class="flex gap-x-3"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> <span>Ikke offisiell — men veldig nyttig</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bidra / Contribute -->
+    <div id="bidra" class="max-w-screen-xl mx-auto px-6 pb-20">
+        <div class="bg-gradient-to-br from-[#1f2937] to-[#111827] text-white rounded-3xl p-10 md:p-14 border border-white/10">
+            <div class="max-w-2xl">
+                <h3 class="text-3xl font-semibold tracking-tight mb-3 text-[#f1592a]">Mangler et API?</h3>
+                <p class="text-white/80 mb-8">Hjelp oss å gjøre samlingen komplett. Send inn forslag til nye API-er, eller foreslå forbedringer.</p>
+                
+                <!-- Bidra med API - koblet til Formspree -->
+                <form id="submit-form" 
+                      action="https://formspree.io/f/mzdovylq" 
+                      method="POST"
+                      class="space-y-4">
+                    <input type="hidden" name="_subject" value="Nytt API-forslag til NorskeAPI">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-white/70 mb-1.5">Navn på API</label>
+                            <input type="text" name="api_name" id="api-name" required 
+                                   class="w-full bg-white/10 border border-white/20 focus:border-white/40 rounded-2xl px-4 py-3 text-sm placeholder:text-white/40 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-white/70 mb-1.5">Leverandør / Eier</label>
+                            <input type="text" name="provider" id="api-provider" required 
+                                   class="w-full bg-white/10 border border-white/20 focus:border-white/40 rounded-2xl px-4 py-3 text-sm placeholder:text-white/40 outline-none">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-xs font-medium text-white/70 mb-1.5">Kort beskrivelse</label>
+                        <textarea name="description" id="api-desc" rows="2" required 
+                                  class="w-full bg-white/10 border border-white/20 focus:border-white/40 rounded-2xl px-4 py-3 text-sm placeholder:text-white/40 outline-none resize-y"></textarea>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-white/70 mb-1.5">Lenke til dokumentasjon</label>
+                            <input type="url" name="documentation_url" id="api-url" required placeholder="https://..."
+                                   class="w-full bg-white/10 border border-white/20 focus:border-white/40 rounded-2xl px-4 py-3 text-sm placeholder:text-white/40 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-white/70 mb-1.5">Kategori(er)</label>
+                            <input type="text" name="categories" id="api-categories" placeholder="Vær, Transport (komma-separert)"
+                                   class="w-full bg-white/10 border border-white/20 focus:border-white/40 rounded-2xl px-4 py-3 text-sm placeholder:text-white/40 outline-none">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" 
+                            class="mt-2 w-full md:w-auto inline-flex items-center justify-center gap-x-2 bg-[#f1592a] hover:bg-[#f1592a]/90 text-white font-semibold px-8 h-12 rounded-3xl active:scale-[0.985] transition-all">
+                        <i class="fa-solid fa-paper-plane"></i>
+                        <span>Send inn forslag</span>
+                    </button>
+                    
+                    <p class="text-xs text-white/50">Forslaget ditt vil bli gjennomgått og lagt til i samlingen.</p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t bg-white">
+        <div class="max-w-screen-xl mx-auto px-6 py-10 text-sm text-slate-500">
+            <div class="grid md:grid-cols-2 gap-y-8">
+                <!-- Venstre side -->
+                <div>
+                    <div class="flex items-center gap-x-3 mb-3">
+                        <img src="gamechanging-logo.png" alt="Gamechanging AS" class="h-8 w-auto">
+                        <a href="https://gamechanging.no" target="_blank" class="font-semibold text-slate-700 hover:text-slate-900">Gamechanging AS</a>
+                    </div>
+                    <p class="text-xs">
+                        Org.nr: 932 496 321
+                    </p>
+                </div>
+
+                <!-- Høyre side -->
+                <div class="flex flex-col md:items-end gap-y-2 text-sm">
+                    <div class="flex flex-wrap gap-x-5 gap-y-1">
+                        <a href="https://gamechanging.no" target="_blank" class="hover:text-slate-700 transition-colors">Om Gamechanging</a>
+                        <a href="#bestill-api" class="hover:text-slate-700 transition-colors">Utvikle API</a>
+                        <a href="#bidra" class="hover:text-slate-700 transition-colors">Bidra med API</a>
+                    </div>
+                    <div class="pt-2 text-xs flex items-center gap-x-4">
+                        <a href="https://data.norge.no/" target="_blank" class="hover:text-slate-700 transition-colors">Offisiell kilde: data.norge.no</a>
+                        <span class="text-slate-300">•</span>
+                        <span>v1.0 • 2026</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tailwind script
+        function initializeTailwind() {
+            document.documentElement.style.setProperty('--accent', '#f1592a');
+        }
+
+        // API Data
+        const apis = [
+            {
+                id: 1,
+                name: "MET Weather API (Yr)",
+                provider: "Meteorologisk institutt (MET)",
+                description: "Gratis værprognoser, observasjoner, luftkvalitet og nordlysprognose for Norge og hele verden. Brukes av Yr.no.",
+                url: "https://api.met.no/",
+                docs: "https://developer.yr.no/",
+                categories: ["Vær", "Nordlys"],
+                type: "Offisiell • Gratis",
+                icon: "fa-cloud-sun"
+            },
+            {
+                id: 2,
+                name: "Entur Journey Planner API",
+                provider: "Entur AS",
+                description: "Nasjonal reiseplanlegger for buss, tog, trikk, båt og mer. Sanntidsdata og ruteplanlegging over hele Norge.",
+                url: "https://developer.entur.org/",
+                docs: "https://developer.entur.org/",
+                categories: ["Transport"],
+                type: "Offisiell • Gratis",
+                icon: "fa-bus"
+            },
+            {
+                id: 3,
+                name: "Trafikkdata API",
+                provider: "Statens vegvesen",
+                description: "Trafikkvolum, sykkel- og biltrafikk fra målepunkter over hele Norge. Timedata og aggregerte tall.",
+                url: "https://trafikkdata.atlas.vegvesen.no/",
+                docs: "https://trafikkdata.atlas.vegvesen.no/om-api",
+                categories: ["Trafikk", "Transport"],
+                type: "Offisiell • Gratis",
+                icon: "fa-car"
+            },
+            {
+                id: 4,
+                name: "Enhetsregisteret API",
+                provider: "Brønnøysundregistrene",
+                description: "Søk og hent data om alle norske bedrifter og enheter. Organisasjonsnummer, roller, adresser m.m.",
+                url: "https://data.brreg.no/enhetsregisteret/api/dokumentasjon",
+                docs: "https://data.brreg.no/enhetsregisteret/api/dokumentasjon",
+                categories: ["Register", "Bedrift"],
+                type: "Offisiell • Gratis",
+                icon: "fa-building"
+            },
+            {
+                id: 5,
+                name: "Kartverket / Geonorge API-er",
+                provider: "Kartverket",
+                description: "Geodata, WMS/WFS karttjenester, stedsnavnregister (SSR), geokoding og nasjonale kartdata.",
+                url: "https://kartverket.no/api-og-data",
+                docs: "https://kartverket.no/api-og-data",
+                categories: ["Geodata", "Kart"],
+                type: "Offisiell • Gratis",
+                icon: "fa-map"
+            },
+            {
+                id: 6,
+                name: "SSB PxWebApi",
+                provider: "Statistisk sentralbyrå (SSB)",
+                description: "Tilgang til over 7500 statistikktabeller om befolkning, økonomi, helse, utdanning og samfunn.",
+                url: "https://www.ssb.no/api",
+                docs: "https://www.ssb.no/api",
+                categories: ["Statistikk"],
+                type: "Offisiell • Gratis",
+                icon: "fa-chart-bar"
+            },
+            {
+                id: 7,
+                name: "NVE HydAPI",
+                provider: "Norges vassdrags- og energidirektorat",
+                description: "Hydrologiske data: vannføring, vannstand, temperatur, snø og flomvarsling fra vassdrag over hele landet.",
+                url: "https://hydapi.nve.no/",
+                docs: "https://hydapi.nve.no/",
+                categories: ["Miljø", "Hydrologi"],
+                type: "Offisiell • Gratis",
+                icon: "fa-water"
+            },
+            {
+                id: 8,
+                name: "xapi.no",
+                provider: "xapi.no",
+                description: "Én integrasjon til 40+ norske offentlige datakilder — Brønnøysundregistrene, Kartverket, Lovdata, Domstol m.fl.",
+                url: "https://www.xapi.no/",
+                docs: "https://www.xapi.no/",
+                categories: ["Aggregator"],
+                type: "Kommersiell • Gratis tier",
+                icon: "fa-plug"
+            },
+            {
+                id: 9,
+                name: "Fiskeridirektoratet API-katalog",
+                provider: "Fiskeridirektoratet",
+                description: "Data om akvakultur, fiskeri, miljøundersøkelser, fartøyregister og mye mer fra havbruksnæringen.",
+                url: "https://api.fiskeridir.no/catalog/",
+                docs: "https://api.fiskeridir.no/catalog/",
+                categories: ["Miljø", "Fiskeri"],
+                type: "Offisiell • Gratis",
+                icon: "fa-fish"
+            },
+            {
+                id: 10,
+                name: "BarentsWatch APIs",
+                provider: "BarentsWatch",
+                description: "Marine data: AIS-skipstrafikk, fiskehelse, bølgevarsel, polar lows og havobservasjoner i nordområdene.",
+                url: "https://developer.barentswatch.no/",
+                docs: "https://developer.barentswatch.no/",
+                categories: ["Marine", "Miljø"],
+                type: "Offisiell • Krever registrering",
+                icon: "fa-ship"
+            },
+            {
+                id: 11,
+                name: "NVE api.nve.no (flere API-er)",
+                provider: "NVE",
+                description: "Flere API-er: Regobs (snøskredobservasjoner), Vannkraftdatabase, Flomvarsling og mer.",
+                url: "https://api.nve.no/",
+                docs: "https://api.nve.no/",
+                categories: ["Miljø", "Hydrologi"],
+                type: "Offisiell • Noen krever auth",
+                icon: "fa-mountain"
+            },
+            {
+                id: 12,
+                name: "data.norge.no API",
+                provider: "Digitaliseringsdirektoratet",
+                description: "API for å søke i hele Norges felles datakatalog — datasets, API-er, begreper og informasjonsmodeller.",
+                url: "https://data.norge.no/en/technical/api",
+                docs: "https://data.norge.no/en/technical/api",
+                categories: ["Meta", "Data"],
+                type: "Offisiell • Gratis",
+                icon: "fa-database"
+            },
+            {
+                id: 13,
+                name: "Nordlys / Aurora Forecast (Yr)",
+                provider: "Meteorologisk institutt + NOAA",
+                description: "Nordlysprognose integrert i Yr. Basert på romværdata. Perfekt for apper som viser nordlysaktivitet.",
+                url: "https://hjelp.yr.no/hc/no/articles/4411702484754-Aurora-forecast-on-Yr",
+                docs: "https://developer.yr.no/",
+                categories: ["Nordlys", "Vær"],
+                type: "Offisiell • Gratis",
+                icon: "fa-meteor"
+            },
+            {
+                id: 14,
+                name: "Vegvesen NVDB / Routing (delvis)",
+                provider: "Statens vegvesen",
+                description: "Nasjonal vegdatabase (NVDB) og ruteplanleggingstjenester via åpne grensesnitt.",
+                url: "https://www.vegvesen.no/fag/teknologi/apne-data/",
+                docs: "https://www.vegvesen.no/fag/teknologi/apne-data/",
+                categories: ["Trafikk", "Geodata"],
+                type: "Offisiell • Gratis",
+                icon: "fa-road"
+            },
+            {
+                id: 15,
+                name: "Bring / Posten Developer APIs",
+                provider: "Posten Bring AS",
+                description: "Shipping Guide, Booking, Tracking, rates og EDI for pakker og gods. Essensielt for e-handel og logistikk.",
+                url: "https://developer.bring.com/",
+                docs: "https://developer.bring.com/",
+                categories: ["Logistikk", "E-handel"],
+                type: "Offisiell • Krever API-nøkkel",
+                icon: "fa-truck"
+            },
+            {
+                id: 16,
+                name: "Vipps MobilePay APIs",
+                provider: "Vipps MobilePay",
+                description: "Betalings-API, eID, signering, checkout og recurring payments. Norges mest populære betalingsløsning.",
+                url: "https://developer.vippsmobilepay.com/",
+                docs: "https://developer.vippsmobilepay.com/",
+                categories: ["Betaling", "Identifisering"],
+                type: "Offisiell • Krever partnerskap",
+                icon: "fa-mobile-alt"
+            },
+            {
+                id: 17,
+                name: "Matrikkel API (Kartverket)",
+                provider: "Kartverket",
+                description: "Offisielt eiendomsregister: adresser, bygninger, boliger, eiere og matrikkeldata. Gull for eiendomsapper og adressevalidering.",
+                url: "https://kartverket.no/api-og-data/eiendomsdata",
+                docs: "https://matrikkel.no/matrikkelapi/wsapi/v1/dokumentasjon/index.html",
+                categories: ["Geodata", "Eiendom", "Adresse"],
+                type: "Offisiell • Søknad kreves for full tilgang",
+                icon: "fa-home"
+            },
+            {
+                id: 18,
+                name: "Tolletaten Open Data API",
+                provider: "Tolletaten",
+                description: "Åpne data og API-er for import/eksport, toll, handelsstatistikk og grensepassering. Nyttig for handel og logistikk.",
+                url: "https://data.toll.no/",
+                docs: "https://toll.github.io/",
+                categories: ["Handel", "Toll", "Statistikk"],
+                type: "Offisiell • Gratis",
+                icon: "fa-globe"
+            }
+        ]
+
+        // Render API cards
+        function renderAPIs(filteredApis) {
+            const grid = document.getElementById('api-grid');
+            const noResults = document.getElementById('no-results');
+            grid.innerHTML = '';
+            
+            if (filteredApis.length === 0) {
+                noResults.classList.remove('hidden');
+                grid.classList.add('hidden');
+                return;
+            } else {
+                noResults.classList.add('hidden');
+                grid.classList.remove('hidden');
+            }
+
+            filteredApis.forEach(api => {
+                const cardHTML = `
+                    <div class="api-card bg-white border border-slate-200 rounded-3xl p-6 flex flex-col h-full modern-shadow group">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex items-center gap-x-3">
+                                <div class="w-11 h-11 flex-shrink-0 bg-slate-100 group-hover:bg-[#f1592a]/10 transition-colors rounded-2xl flex items-center justify-center">
+                                    <i class="fa-solid ${api.icon} text-[#f1592a] text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-lg leading-tight tracking-tight pr-2">${api.name}</h3>
+                                    <p class="text-xs text-slate-500 mt-0.5">${api.provider}</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p class="text-sm text-slate-600 flex-grow leading-relaxed mb-5">${api.description}</p>
+                        
+                        <div class="flex flex-wrap gap-1.5 mb-5">
+                            ${api.categories.map(cat => `
+                                <span class="api-tag bg-slate-100 text-slate-600 px-2.5 py-px">${cat}</span>
+                            `).join('')}
+                        </div>
+                        
+                        <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
+                            <div>
+                                <span class="text-xs font-medium px-3 py-1 bg-emerald-100 text-emerald-700 rounded-2xl">${api.type}</span>
+                            </div>
+                            
+                            <div class="flex items-center gap-x-2">
+                                <a href="${api.url}" target="_blank" 
+                                   class="text-xs font-semibold px-4 py-2 rounded-2xl border border-slate-200 hover:bg-slate-50 flex items-center gap-x-1.5 transition-colors">
+                                    <span>Åpne</span>
+                                </a>
+                                <a href="${api.docs}" target="_blank" 
+                                   class="text-xs font-semibold px-4 py-2 bg-[#f1592a] text-white rounded-2xl flex items-center gap-x-1.5 hover:bg-[#f1592a]/90 transition-colors">
+                                    <span>Docs</span>
+                                    <i class="fa-solid fa-external-link-alt text-xs"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += cardHTML;
+            });
+        }
+
+        // Category filters
+        let selectedCategories = new Set();
+
+        function renderCategoryFilters() {
+            const container = document.getElementById('category-filters');
+            container.innerHTML = '';
+            
+            // Get unique categories
+            const allCategories = new Set();
+            apis.forEach(api => api.categories.forEach(cat => allCategories.add(cat)));
+            
+            const sortedCategories = Array.from(allCategories).sort();
+            
+            // "Alle" button
+            const allBtn = document.createElement('button');
+            allBtn.className = `category-pill px-5 py-1.5 text-sm font-medium border border-slate-200 rounded-3xl hover:bg-slate-50 transition-all ${selectedCategories.size === 0 ? 'filter-active bg-[#f1592a] text-white border-[#f1592a]' : 'bg-white text-slate-700'}`;
+            allBtn.innerHTML = `Alle <span class="text-xs opacity-60">(${apis.length})</span>`;
+            allBtn.onclick = () => {
+                selectedCategories.clear();
+                filterAndRender();
+            };
+            container.appendChild(allBtn);
+            
+            sortedCategories.forEach(category => {
+                const count = apis.filter(a => a.categories.includes(category)).length;
+                const btn = document.createElement('button');
+                btn.className = `category-pill px-5 py-1.5 text-sm font-medium border border-slate-200 rounded-3xl hover:bg-slate-50 transition-all flex items-center gap-x-1.5 ${selectedCategories.has(category) ? 'filter-active bg-[#f1592a] text-white border-[#f1592a]' : 'bg-white text-slate-700'}`;
+                btn.innerHTML = `${category} <span class="text-xs opacity-60">(${count})</span>`;
+                
+                btn.onclick = () => {
+                    if (selectedCategories.has(category)) {
+                        selectedCategories.delete(category);
+                    } else {
+                        selectedCategories.add(category);
+                    }
+                    filterAndRender();
+                };
+                
+                container.appendChild(btn);
+            });
+        }
+
+        // Filter and render
+        function filterAndRender() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase().trim();
+            
+            let filtered = apis;
+            
+            // Search filter
+            if (searchTerm.length > 0) {
+                filtered = filtered.filter(api => 
+                    api.name.toLowerCase().includes(searchTerm) ||
+                    api.description.toLowerCase().includes(searchTerm) ||
+                    api.provider.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            // Category filter
+            if (selectedCategories.size > 0) {
+                filtered = filtered.filter(api => 
+                    api.categories.some(cat => selectedCategories.has(cat))
+                );
+            }
+            
+            renderAPIs(filtered);
+        }
+
+        function resetFilters() {
+            selectedCategories.clear();
+            document.getElementById('search-input').value = '';
+            filterAndRender();
+            updateCategoryDropdown();
+        }
+
+        // === Ny Category Dropdown ===
+        function toggleCategoryDropdown() {
+            const dropdown = document.getElementById('category-dropdown');
+            dropdown.classList.toggle('hidden');
+        }
+
+        function updateCategoryDropdown() {
+            const container = document.getElementById('category-checkboxes');
+            if (!container) return;
+
+            container.innerHTML = '';
+
+            const allCategories = new Set();
+            apis.forEach(api => api.categories.forEach(cat => allCategories.add(cat)));
+
+            Array.from(allCategories).sort().forEach(category => {
+                const count = apis.filter(a => a.categories.includes(category)).length;
+                const isChecked = selectedCategories.has(category);
+
+                const div = document.createElement('div');
+                div.className = 'flex items-center gap-x-3 px-3 py-2 hover:bg-slate-50 rounded-2xl cursor-pointer';
+                div.innerHTML = `
+                    <input type="checkbox" ${isChecked ? 'checked' : ''} 
+                           class="w-4 h-4 accent-[#f1592a]">
+                    <span class="flex-1 text-sm">${category} <span class="text-xs text-slate-400">(${count})</span></span>
+                `;
+
+                const checkbox = div.querySelector('input');
+                checkbox.onchange = () => {
+                    if (checkbox.checked) {
+                        selectedCategories.add(category);
+                    } else {
+                        selectedCategories.delete(category);
+                    }
+                    updateCategoryButtonText();
+                    filterAndRender();
+                };
+
+                div.onclick = (e) => {
+                    if (e.target !== checkbox) {
+                        checkbox.checked = !checkbox.checked;
+                        checkbox.onchange();
+                    }
+                };
+
+                container.appendChild(div);
+            });
+
+            updateCategoryButtonText();
+        }
+
+        function updateCategoryButtonText() {
+            const btnText = document.getElementById('category-button-text');
+            if (!btnText) return;
+
+            if (selectedCategories.size === 0) {
+                btnText.textContent = 'Alle kategorier';
+            } else if (selectedCategories.size === 1) {
+                btnText.textContent = Array.from(selectedCategories)[0];
+            } else {
+                btnText.textContent = `${selectedCategories.size} valgt`;
+            }
+        }
+
+        function clearCategoryFilters() {
+            selectedCategories.clear();
+            updateCategoryDropdown();
+            filterAndRender();
+        }
+
+        // === Formspree AJAX submission (anbefalt for best brukeropplevelse) ===
+
+        async function submitFormspree(formElement, successHTML) {
+            const formData = new FormData(formElement);
+            
+            try {
+                const response = await fetch(formElement.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    formElement.innerHTML = successHTML;
+                } else {
+                    alert("Noe gikk galt. Vennligst prøv igjen eller send e-post direkte.");
+                }
+            } catch (error) {
+                alert("Kunne ikke sende skjemaet. Sjekk internettforbindelsen din.");
+            }
+        }
+
+        // Bidra med API (Formspree)
+        document.getElementById('submit-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const successHTML = `
+                <div class="text-center py-8">
+                    <i class="fa-solid fa-check-circle text-emerald-400 text-5xl mb-4"></i>
+                    <h4 class="font-semibold text-xl mb-2">Takk! Forslaget er sendt.</h4>
+                    <p class="text-white/70">Vi gjennomgår det og legger det til i samlingen snart.</p>
+                    <button onclick="location.reload()" 
+                            class="mt-6 text-sm px-6 py-2 border border-white/30 hover:bg-white/10 rounded-3xl transition-colors">
+                        Lukk
+                    </button>
+                </div>
+            `;
+            
+            submitFormspree(this, successHTML);
+        });
+
+        // Bestill API fra Gamechanging AS (Formspree)
+        document.getElementById('custom-api-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const successHTML = `
+                <div class="text-center py-6">
+                    <i class="fa-solid fa-check-circle text-emerald-500 text-5xl mb-4"></i>
+                    <h4 class="font-semibold text-xl mb-2 text-slate-800">Takk! Vi har mottatt forespørselen.</h4>
+                    <p class="text-slate-600">En av våre utviklere hos Gamechanging AS tar kontakt med deg innen kort tid.</p>
+                    <button onclick="location.reload()" 
+                            class="mt-6 text-sm px-6 py-2.5 border border-slate-300 hover:bg-slate-50 rounded-3xl transition-colors text-slate-700">
+                        Lukk
+                    </button>
+                </div>
+            `;
+            
+            submitFormspree(this, successHTML);
+        });
+
+        // Initialize everything
+        function initialize() {
+            initializeTailwind();
+            
+            // Initial render
+            renderAPIs(apis);
+            updateCategoryDropdown();
+            
+            // Search listener
+            const searchInput = document.getElementById('search-input');
+            searchInput.addEventListener('input', () => {
+                filterAndRender();
+            });
+            
+            // Keyboard shortcut for search
+            document.addEventListener('keydown', function(e) {
+                if (e.key === '/' && document.activeElement.tagName === 'BODY') {
+                    e.preventDefault();
+                    searchInput.focus();
+                }
+            });
+            
+            // Easter egg: Press "?" to show all categories
+            document.addEventListener('keypress', function(e) {
+                if (e.key === '?') {
+                    selectedCategories.clear();
+                    const allCats = new Set();
+                    apis.forEach(a => a.categories.forEach(c => allCats.add(c)));
+                    allCats.forEach(c => selectedCategories.add(c));
+                    filterAndRender();
+                    updateCategoryDropdown();
+                }
+            });
+            
+            console.log('%c[NorskeAPI] One-pager initialisert. Trykk "?" for å vise alle kategorier.', 'color:#64748b');
+        }
+
+        // Boot
+        window.onload = initialize;
+    </script>
+</body>
+</html>
